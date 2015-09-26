@@ -5,29 +5,29 @@ require_dependency "hello/application_controller"
 #
 
 module Hello
-  class AccessTokensController < ApplicationController
+  class AccessesController < ApplicationController
     
     kick :guest, :novice
     
     before_actions do
       all            { sudo_mode }
-      only(:index)   { @access_tokens = current_user.access_tokens }
-      only(:destroy) { @access_token  = current_user.access_tokens.find(params[:id]) }
+      only(:index)   { @accesses = current_user.accesses }
+      only(:destroy) { @access_token  = current_user.accesses.find(params[:id]) }
     end
 
-    # GET /hello/access_tokens
+    # GET /hello/accesses
     def index
     end
 
-    # DELETE /hello/access_tokens/1
+    # DELETE /hello/accesses/1
     def destroy
-      entity = DestroyAccessTokenEntity.new
+      entity = DestroyAccessEntity.new
       if @access_token.destroy
         flash[:notice] = entity.success_message
       else
         flash[:alert]  = entity.alert_message
       end
-      redirect_to access_tokens_url
+      redirect_to accesses_url
     end
 
   end

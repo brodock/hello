@@ -10,8 +10,8 @@ RSpec.describe "Hello Gem", type: :request do
 
       Given "I have a novice access token" do
         u = create(:novice)
-        at = create(:access_token, user: u, expires_at: 24.hours.from_now)
-        @token = at.access_token
+        a = create(:access, user: u, expires_at: 24.hours.from_now)
+        @token = a.token
         expect(User.last.role).to eq('novice')
       end
     end
